@@ -14,9 +14,9 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class MatrixTest {
 	@Parameter(value = 0)
-	public int numberOfColumns;
-	@Parameter(value = 1)
 	public int numberOfLines;
+	@Parameter(value = 1)
+	public int numberOfColumns;
 	@Parameter(value = 2)
 	public String inputMatrixContent;
 	@Parameter(value = 3)
@@ -37,10 +37,10 @@ public class MatrixTest {
 				{-1, 1, ".", "", IllegalArgumentException.class, "Line values must be between 0 and 100" }, 
 				{1, 101, ".", "", IllegalArgumentException.class, "Column values must be between 0 and 100" },
 				{101, 1, ".", "", IllegalArgumentException.class, "Line values must be between 0 and 100" },
-				{1, 1, "", "", IllegalArgumentException.class, "Invalid values from the matrix" },
-				{1, 1, null, "", IllegalArgumentException.class, "Invalid values from the matrix" },
-				{2, 2, ".", "", IllegalArgumentException.class, "Invalid values from the matrix" },
-				{1, 1, "..", "", IllegalArgumentException.class, "Invalid values from the matrix" },
+				{1, 1, "", "", IllegalArgumentException.class, "Invalid values for the matrix" },
+				{1, 1, null, "", IllegalArgumentException.class, "Invalid values for the matrix" },
+				{2, 2, ".", "", IllegalArgumentException.class, "Invalid values for the matrix" },
+				{1, 1, "..", "", IllegalArgumentException.class, "Invalid values for the matrix" },
 				{2, 2, "...z", "", IllegalArgumentException.class, "Invalid character found" },
 				{ 1, 1, ".", "0", null, "" },
 				{ 2, 2, "....", "0000", null, "" },
@@ -54,7 +54,8 @@ public class MatrixTest {
 				{ 3, 3, "*........", "*10110000", null, "" },
 				{ 3, 3, ".*.......", "1*1111000", null, "" },
 				{ 4, 4, "*........*......", "*10022101*101110", null, "" },
-				{ 5, 3, "**.........*...", "**100332001*100", null, "" },
+				{ 3, 5, "**.........*...", "**100332001*100", null, "" },
+				{ 2, 2, "****", "****", null, "" },
 			});
 	}
 	

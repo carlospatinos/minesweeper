@@ -15,17 +15,17 @@ public class Matrix {
 	private static final int MIN_NUM_LINES = 0;
 
 	public Matrix(int numberOfLines, int numberOfColumns, String plainContent) {
-		if (numberOfColumns < MIN_NUM_COLUMNS || numberOfColumns > MAX_NUM_COLUMNS) {
+		if (numberOfLines < MIN_NUM_COLUMNS || numberOfLines > MAX_NUM_COLUMNS) {
 			throw new IllegalArgumentException("Line values must be between 0 and 100");
 		}
 
-		if (numberOfLines < MIN_NUM_LINES || numberOfLines > MAX_NUM_LINES) {
+		if (numberOfColumns < MIN_NUM_LINES || numberOfColumns > MAX_NUM_LINES) {
 			throw new IllegalArgumentException("Column values must be between 0 and 100");
 		}
 
 		int expectedNumberOfCharacters = numberOfColumns * numberOfLines;
 		if (plainContent == null || plainContent.length() == 0 || plainContent.length() != expectedNumberOfCharacters) {
-			throw new IllegalArgumentException("Invalid values from the matrix");
+			throw new IllegalArgumentException("Invalid values for the matrix");
 		}
 
 		this.matrixNumberOfLines = numberOfLines;
@@ -71,8 +71,6 @@ public class Matrix {
 					continue;
 				}
 				if (positionNeighborgLine < MIN_NUM_LINES || positionNeighborgColumn < MIN_NUM_COLUMNS
-						|| positionNeighborgLine > MAX_NUM_LINES
-						|| positionNeighborgColumn > MAX_NUM_COLUMNS
 						|| positionNeighborgColumn >= NUMBER_OF_COLUMNS // LIMIT
 						|| (NUMBER_OF_COLUMNS > 1 && positionNeighborgLine >= content[0].length)
 						|| positionNeighborgLine >= matrixNumberOfLines || positionNeighborgColumn >= matrixNumberOfColumns) {
