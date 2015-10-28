@@ -11,8 +11,10 @@ public class Matrix {
 
 	private static final int MAX_NUM_COLUMNS = 100;
 	private static final int MAX_NUM_LINES = 100;
-	private static final int MIN_NUM_COLUMNS = 0;
-	private static final int MIN_NUM_LINES = 0;
+	private static final int MIN_NUM_COLUMNS = 1;
+	private static final int MIN_NUM_LINES = 1;
+	private static final int FIRST_COLUMN_IN_MATRIX = 0;
+	private static final int FIRST_LINE_IN_MATRIX = 0;
 
 	public Matrix(int numberOfLines, int numberOfColumns, String plainContent) {
 		if (numberOfLines < MIN_NUM_COLUMNS || numberOfLines > MAX_NUM_COLUMNS) {
@@ -70,7 +72,7 @@ public class Matrix {
 				if (positionNeighborgColumn == positionColumn && positionNeighborgLine == positionLine) {
 					continue;
 				}
-				if (positionNeighborgLine < MIN_NUM_LINES || positionNeighborgColumn < MIN_NUM_COLUMNS
+				if (positionNeighborgLine < FIRST_LINE_IN_MATRIX || positionNeighborgColumn < FIRST_COLUMN_IN_MATRIX
 						|| positionNeighborgColumn >= NUMBER_OF_COLUMNS // LIMIT
 						|| (NUMBER_OF_COLUMNS > 1 && positionNeighborgLine >= content[0].length)
 						|| positionNeighborgLine >= matrixNumberOfLines || positionNeighborgColumn >= matrixNumberOfColumns) {
