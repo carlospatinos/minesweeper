@@ -1,4 +1,4 @@
-package com.ericsson.minesweeper;
+package com.kinettikmx.minesweeper;
 
 
 import static org.mockito.Mockito.times;
@@ -17,6 +17,9 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
+
+import com.kinettikmx.minesweeper.Game;
+import com.kinettikmx.minesweeper.UserInterface;
 
 @RunWith(Parameterized.class)
 public class GameTest {

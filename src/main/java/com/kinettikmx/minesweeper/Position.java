@@ -1,4 +1,4 @@
-package com.ericsson.minesweeper;
+package com.kinettikmx.minesweeper;
 
 import java.util.List;
 

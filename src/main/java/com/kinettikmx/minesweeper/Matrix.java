@@ -1,4 +1,4 @@
-package com.ericsson.minesweeper;
+package com.kinettikmx.minesweeper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +94,7 @@ public class Matrix {
 	private Position[][] buildContent(String matrixContent) {
 		matrixContent = matrixContent.replaceAll(System.lineSeparator(), "");
 		Position[][] matrix = new Position[matrixNumberOfLines][matrixNumberOfColumns];
-		String[] subMatrix = matrixContent.split("(?<=\\G.{" + matrixNumberOfColumns + "})");
+		String[] subMatrix = splitIntoRows(matrixContent, matrixNumberOfColumns);
 
 		for (int lineIndex = 0; lineIndex < matrixNumberOfLines; lineIndex++) {
 			for (int columnIndex = 0; columnIndex < matrixNumberOfColumns; columnIndex++) {
@@ -103,6 +103,20 @@ public class Matrix {
 			}
 		}
 		return matrix;
+	}
+
+	private String[] splitIntoRows(String matrixContent, int columns) {
+		return matrixContent.split("(?<=\\G.{" + columns + "})");
+		
+		/*String[] rows = new String[columns];
+		int rowNumber = 0;
+		int index = 0;
+		while (index < matrixContent.length()) {
+		    rows[rowNumber] = (matrixContent.substring(index, Math.min(index + 4,matrixContent.length())));
+		    index += 4;
+		    rowNumber++;
+		}
+		return rows;*/
 	}
 
 	public String showMines() {
