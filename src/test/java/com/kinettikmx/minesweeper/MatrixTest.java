@@ -31,7 +31,7 @@ public class MatrixTest {
 	@Rule
 	public ExpectedException expected = ExpectedException.none();
 
-	@Parameters(name = "{index}: Matrix Size ({0}, {1}) with Content \"{2}\" => Expected matrix outout is {3} and expected exception : {4} with message: \"{5}\"")
+	@Parameters(name = "{index}: Matrix Size ({0}, {1}) with content \"{2}\" => Expected matrix output is {3} and expected exception : {4} with message: \"{5}\"")
 	public static Iterable<Object[]> data() {
 		return Arrays.asList(
 			new Object[][] { 
@@ -39,10 +39,10 @@ public class MatrixTest {
 				{-1, 1, ".", "", IllegalArgumentException.class, "Line values must be between 0 and 100" }, 
 				{1, 101, ".", "", IllegalArgumentException.class, "Column values must be between 0 and 100" },
 				{101, 1, ".", "", IllegalArgumentException.class, "Line values must be between 0 and 100" },
-				{1, 1, "", "", IllegalArgumentException.class, "Invalid values for the matrix" },
-				{1, 1, null, "", IllegalArgumentException.class, "Invalid values for the matrix" },
-				{2, 2, ".", "", IllegalArgumentException.class, "Invalid values for the matrix" },
-				{1, 1, "..", "", IllegalArgumentException.class, "Invalid values for the matrix" },
+				{1, 1, "", "", IllegalArgumentException.class, "Invalid number of characters for the matrix" },
+				{1, 1, null, "", IllegalArgumentException.class, "Invalid number of characters for the matrix" },
+				{2, 2, ".", "", IllegalArgumentException.class, "Invalid number of characters for the matrix" },
+				{1, 1, "..", "", IllegalArgumentException.class, "Invalid number of characters for the matrix" },
 				{2, 2, "...z", "", IllegalArgumentException.class, "Invalid character found" },
 				{ 1, 1, ".", "0", null, "" },
 				{ 2, 2, "....", "0000", null, "" },

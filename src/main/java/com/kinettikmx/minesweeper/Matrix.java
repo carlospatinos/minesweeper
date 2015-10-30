@@ -2,10 +2,12 @@ package com.kinettikmx.minesweeper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Matrix {
 
 	private Position[][] content;
+	private  static Random rand = new Random();
 	public final int matrixNumberOfLines;
 	public final int matrixNumberOfColumns;
 
@@ -15,6 +17,17 @@ public class Matrix {
 	private static final int MIN_NUM_LINES = 1;
 	private static final int FIRST_COLUMN_IN_MATRIX = 0;
 	private static final int FIRST_LINE_IN_MATRIX = 0;
+
+	public Matrix() {
+		// Minimal matrix is 2 x 2
+		// Max Matrix is 5 x 5
+		this(randInt(2,MAX_NUM_LINES), randInt(2,MAX_NUM_LINES));
+	}
+
+
+	public Matrix(int numberOfLines, int numberOfColumns) {
+        this(numberOfLines, numberOfColumns, buildRandomMatrix(numberOfLines, numberOfColumns));
+    }
 
 	public Matrix(int numberOfLines, int numberOfColumns, String plainContent) {
 		if (numberOfLines < MIN_NUM_COLUMNS || numberOfLines > MAX_NUM_COLUMNS) {
@@ -27,7 +40,7 @@ public class Matrix {
 
 		int expectedNumberOfCharacters = numberOfColumns * numberOfLines;
 		if (plainContent == null || plainContent.length() == 0 || plainContent.length() != expectedNumberOfCharacters) {
-			throw new IllegalArgumentException("Invalid values for the matrix");
+			throw new IllegalArgumentException("Invalid number of characters for the matrix");
 		}
 
 		this.matrixNumberOfLines = numberOfLines;
@@ -43,6 +56,25 @@ public class Matrix {
 				position.setNeighborgs(neighborgs);
 			}
 		}
+	}
+
+	private static int randInt(int min, int max) {
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
+	}
+	
+	private static String buildRandomMatrix(int numberOfLines, int numberOfColumns) {
+		int numberofChars = numberOfLines * numberOfColumns;
+
+        String alphabet = ".*";
+        StringBuffer content = new StringBuffer();
+        // Prints 50 random characters from alphabet
+        for (int i = 0; i < numberofChars; i++)  {
+            content.append(alphabet.charAt(rand.nextInt(alphabet.length())));
+        }
+        return content.toString();
 	}
 
 	/**
@@ -92,9 +124,8 @@ public class Matrix {
 	 * @return
 	 */
 	private Position[][] buildContent(String matrixContent) {
-		matrixContent = matrixContent.replaceAll(System.lineSeparator(), "");
 		Position[][] matrix = new Position[matrixNumberOfLines][matrixNumberOfColumns];
-		String[] subMatrix = splitIntoRows(matrixContent, matrixNumberOfColumns);
+		String[] subMatrix = splitStringInColumns(matrixContent, matrixNumberOfColumns) ;
 
 		for (int lineIndex = 0; lineIndex < matrixNumberOfLines; lineIndex++) {
 			for (int columnIndex = 0; columnIndex < matrixNumberOfColumns; columnIndex++) {
@@ -105,19 +136,18 @@ public class Matrix {
 		return matrix;
 	}
 
-	private String[] splitIntoRows(String matrixContent, int columns) {
-		return matrixContent.split("(?<=\\G.{" + columns + "})");
-		
-		/*String[] rows = new String[columns];
-		int rowNumber = 0;
-		int index = 0;
-		while (index < matrixContent.length()) {
-		    rows[rowNumber] = (matrixContent.substring(index, Math.min(index + 4,matrixContent.length())));
-		    index += 4;
-		    rowNumber++;
-		}
-		return rows;*/
-	}
+    private String[] splitStringInColumns(String matrixContent, int numberOfColumns) {
+        //matrixContent.split("(?<=\\G.{" + matrixNumberOfColumns + "})");
+        String[] subMatrix = new String[matrixNumberOfLines];
+        int rowNumber = 0;
+        int index = 0;
+        while (index < matrixContent.length()) {
+            subMatrix[rowNumber] = (matrixContent.substring(index, Math.min(index + numberOfColumns, matrixContent.length())));
+            index += numberOfColumns;
+            rowNumber++;
+        }
+        return subMatrix;
+    }
 
 	public String showMines() {
 		StringBuffer result = new StringBuffer();
@@ -129,5 +159,14 @@ public class Matrix {
 		}
 		return result.toString();
 	}
+
+
+    public String getUnhiddenValue(int col, int row) {
+		Position p = content[row][col];
+		if (p.isMine()) {
+			throw new BombException("This is a bomb");
+		}
+		return p.showAnswer();
+    }
 
 }

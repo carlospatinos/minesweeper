@@ -8,27 +8,22 @@ public class ConsoleUserInterface implements UserInterface {
 	private PrintStream out = System.out;
 	private PrintStream err = System.err;
 	
-	@Override
 	public void show(String message) {
 		out.println(message);
 	}
 
-	@Override
 	public int nextInt() {
 		return scanner.nextInt();
 	}
 
-	@Override
 	public String next() {
 		return scanner.next();
 	}
 
-	@Override
 	public void showError(String message) {
 		err.println(message);
 	}
 
-	@Override
 	public final void clear() {
 		try {
 			final String os = System.getProperty("os.name");
