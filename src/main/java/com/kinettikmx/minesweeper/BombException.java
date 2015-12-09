@@ -6,4 +6,11 @@ public class BombException extends RuntimeException {
 	public BombException(String s) {
         super(s);
     }
+	
+	public static void main(String[] args) {
+
+		Thread d = new Thread();
+		d.start();
+		d.start();
+	}
 }
