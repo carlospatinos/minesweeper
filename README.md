@@ -3,7 +3,7 @@
 
 # MINESWEEPER project
 
-This is a Java project using both maven and following common structure for a java project. The intention is to practice TDD
+This is a Java project using maven, following common structure for a java project. The intention is to practice TDD
 
 Things to keep in mind and help you improve your clean code: 
  * Work in pairs
@@ -19,7 +19,7 @@ The algorithm is not the best in terms of efficiency but the objective was to pr
 
 ## Set-up
 
-Use the git command to clone the project and then you can use either [maven](https://maven.apache.org/install.html) to install dependencies.
+Use the git command to clone the project and then you can must use [maven](https://maven.apache.org/install.html) to install dependencies.
 
 ### To clone first
 
